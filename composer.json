@@ -1,0 +1,55 @@
+{
+    "name": "thisnugroho/discord-webhook",
+    "description": "Discord Webhook",
+    "keywords": [
+        "thisnugroho",
+        "discord-webhook"
+    ],
+    "homepage": "https://github.com/thisnugroho/discord-webhook",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Dede Nugroho",
+            "email": "this.nugroho@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "spatie/laravel-package-tools": "^1.9.2",
+        "spatie/laravel-discord-alerts": "^1.2"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Thisnugroho\\DiscordWebhook\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Thisnugroho\\DiscordWebhook\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Thisnugroho\\DiscordWebhook\\DiscordWebhookServiceProvider"
+            ],
+            "aliases": {
+                "DiscordWebhook": "Thisnugroho\\DiscordWebhook\\DiscordWebhookFacade"
+            }
+        }
+    }
+}
