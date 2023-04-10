@@ -20,4 +20,6 @@ trait HasFields
     {
         return $this->fields;
     }
+
+    abstract function fields(): static;
 }

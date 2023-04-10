@@ -21,4 +21,6 @@ trait HasFiles
     {
         return $this->files;
     }
+
+    abstract function files(): static;
 }
