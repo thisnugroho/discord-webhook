@@ -6,12 +6,22 @@ use Illuminate\Support\Str;
 
 class Element
 {
-    public static function make()
+    /**
+     * Create a new instance of the class.
+     *
+     * @return static
+     */
+    public static function make(): static
     {
         return app(static::class);
     }
 
-    public function toPayload()
+    /**
+     * Returns an array representation of the object's properties.
+     *
+     * @return array
+     */
+    public function toPayload(): array
     {
         $properties = (new \ReflectionClass(static::class))
             ->getProperties();

@@ -2,53 +2,108 @@
 
 namespace Thisnugroho\DiscordWebhook\Elements;
 
+use PhpParser\Node\Stmt\Static_;
 use Thisnugroho\DiscordWebhook\Elements\Concerns\HasFields;
 
 class Embed extends Element
 {
     use HasFields;
 
+    /**
+     * A string that describes the object or null if no description is set.
+     *
+     * @var string|null
+     */
     protected string | null $description = null;
 
+    /**
+     * The URL associated with the object, if any.
+     *
+     * @var string|null
+     */
     protected string | null $url = null;
 
+    /**
+     * The title of the object.
+     *
+     * @var string|null
+     */
     protected string | null $title = null;
 
-    public function description(string $description)
+    /**
+     * Set the description for the expectation.
+     *
+     * @param string $description
+     * @return static
+     */
+    public function description(string $description): static
     {
         $this->description = $description;
         return $this;
     }
 
-    public function url(string $url)
+    /**
+     * Set the URL for the request.
+     *
+     * @param  string  $url
+     * @return static
+     */
+    public function url(string $url): static
     {
         $this->url = $url;
         return $this;
     }
 
-    public function title(string $title)
+    /**
+     * Set the title of the current object.
+     *
+     * @param string $title
+     * @return static
+     */
+    public function title(string $title): static
     {
         $this->title = $title;
         return $this;
     }
 
-    public function fields(array $fields)
+    /**
+     * Set the fields to be retrieved from the database.
+     *
+     * @param  array  $fields
+     * @return static
+     */
+    public function fields(array $fields): static
     {
         $this->fields = [$fields];
         return $this;
     }
 
-    public function getDescription()
+    /**
+     * Get the description of the expectation.
+     *
+     * @return string
+     */
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    public function getUrl()
+    /**
+     * Get the URL associated with the current object.
+     *
+     * @return string
+     */
+    public function getUrl(): string
     {
         return $this->url;
     }
 
-    public function getTitle()
+    /**
+     * Get the title of the object.
+     *
+     * @return string
+     */
+    public function getTitle(): string
     {
         return $this->title;
     }
