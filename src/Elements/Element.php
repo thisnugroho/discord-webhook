@@ -17,29 +17,50 @@ class Element
     }
 
     /**
-     * Returns an array representation of the object's properties.
+     * Recursively evaluates the given value and returns the result.
+     * If the value is an array, it will evaluate each element recursively and return an array of results.
+     * If the value is an instance of the class, it will return the result of the toPayload method.
+     * Otherwise, it will return the value itself.
+     *
+     * @param mixed $value
+     * @return mixed
+     */
+    protected function evalute($value)
+    {
+        if (is_array($value)) {
+            $results = [];
+            foreach ($value as $v) {
+                $results[] = $this->evalute($v);
+            }
+            return $results;
+        }
+
+        if ($value instanceof self) {
+            return $value->toPayload();
+        }
+
+        return $value;
+    }
+
+    /**
+     * Convert the object to a payload array.
      *
      * @return array
      */
-    public function toPayload(): array
+    public function toPayload()
     {
-        $properties = (new \ReflectionClass(static::class))
-            ->getProperties();
+        $class = (new \ReflectionClass(static::class));
         $results = [];
-        foreach ($properties as $property) {
+        foreach ($class->getProperties() as $property) {
             $propertyAsSnakeCase = Str::snake($property->name);
             $prefix = $property->getType() == 'bool' ? 'is' : 'get';
+
             if (!$propertyValue = $this->{$prefix . ucfirst($property->name)}()) {
                 continue;
             }
-            if (is_array($propertyValue)) {
-                foreach (current($propertyValue) as $pv) {
-                    $propertyValue = [$pv->toPayload()];
-                }
-            }
-            $results[$propertyAsSnakeCase] = $propertyValue;
-        }
 
+            $results[$propertyAsSnakeCase] = $this->evalute($propertyValue);
+        }
         return $results;
     }
 }

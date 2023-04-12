@@ -3,24 +3,24 @@
 namespace Thisnugroho\DiscordWebhook\Elements\Concerns;
 
 
-trait HasFiles
+trait HasFile
 {
     /**
      * An array to store file paths.
      *
      * @var array
      */
-    public array $files = [];
+    public array $file = [];
 
     /**
      * Returns the array of files.
      *
      * @return array
      */
-    public function getFiles(): array
+    public function getFile(): array
     {
-        return $this->files;
+        return $this->file;
     }
 
-    abstract function files(): static;
+    abstract public function file(array $files): static;
 }

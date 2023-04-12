@@ -2,7 +2,6 @@
 
 namespace Thisnugroho\DiscordWebhook\Elements;
 
-use PhpParser\Node\Stmt\Static_;
 use Thisnugroho\DiscordWebhook\Elements\Concerns\HasFields;
 
 class Embed extends Element
@@ -74,7 +73,7 @@ class Embed extends Element
      */
     public function fields(array $fields): static
     {
-        $this->fields = [$fields];
+        $this->fields = $fields;
         return $this;
     }
 
@@ -83,7 +82,7 @@ class Embed extends Element
      *
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(): string | null
     {
         return $this->description;
     }
@@ -93,7 +92,7 @@ class Embed extends Element
      *
      * @return string
      */
-    public function getUrl(): string
+    public function getUrl(): string | null
     {
         return $this->url;
     }
@@ -103,7 +102,7 @@ class Embed extends Element
      *
      * @return string
      */
-    public function getTitle(): string
+    public function getTitle(): string | null
     {
         return $this->title;
     }
