@@ -1,6 +1,7 @@
 {
     "name": "thisnugroho/discord-webhook",
     "description": "Discord Webhook",
+    "version": "0.2.0",
     "keywords": [
         "thisnugroho",
         "discord-webhook"
