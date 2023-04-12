@@ -2,11 +2,11 @@
 
 namespace Thisnugroho\DiscordWebhook\Elements;
 
-use Thisnugroho\DiscordWebhook\Elements\Concerns\HasFiles;
+use Thisnugroho\DiscordWebhook\Elements\Concerns\HasFile;
 
 class Content extends Element
 {
-    use HasFiles;
+    use HasFile;
 
     /**
      * The username of the user.
@@ -86,7 +86,7 @@ class Content extends Element
      */
     public function embeds(array $embeds): static
     {
-        $this->embeds = [$embeds];
+        $this->embeds = $embeds;
         return $this;
     }
 
@@ -96,9 +96,9 @@ class Content extends Element
      * @param  array  $files
      * @return static
      */
-    public function files(array $files): static
+    public function file(array $file): static
     {
-        $this->files = $files;
+        $this->file = $file;
         return $this;
     }
 
@@ -107,7 +107,7 @@ class Content extends Element
      *
      * @return string
      */
-    public function getUsername(): string
+    public function getUsername(): string | null
     {
         return $this->username;
     }
@@ -117,7 +117,7 @@ class Content extends Element
      *
      * @return string
      */
-    public function getAvatarUrl(): string
+    public function getAvatarUrl(): string | null
     {
         return $this->avatarUrl;
     }
@@ -147,7 +147,7 @@ class Content extends Element
      *
      * @return string
      */
-    public function getContent(): string
+    public function getContent(): string | null
     {
         return $this->content;
     }
