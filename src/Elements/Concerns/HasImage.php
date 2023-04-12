@@ -8,16 +8,16 @@ trait HasImage
 {
 
     /**
-     * An array of email attachments. If there are no attachments, this property is null.
+     * The image property of the object.
      *
-     * @var array|null
+     * @var Image|null
      */
     protected Image | null $image = null;
 
     /**
-     * Returns an array of attachments associated with the email message.
+     * Get the image associated with the model, if any.
      *
-     * @return array
+     * @return Image|null
      */
     public function getImage(): Image | null
     {
@@ -25,10 +25,10 @@ trait HasImage
     }
 
     /**
-     * Set the attachments for the message.
+     * Apply an image transformation to the current object and return the modified object.
      *
-     * @param  array  $attachments
-     * @return static
+     * @param Image $image The image transformation to apply.
+     * @return static The modified object.
      */
     abstract function image(Image $image): static;
 }

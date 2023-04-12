@@ -78,6 +78,12 @@ class Embed extends Element
         return $this;
     }
 
+    /**
+     * Set the image for the current instance.
+     *
+     * @param  Image  $image
+     * @return static
+     */
     public function image(Image $image): static
     {
         $this->image = $image;
