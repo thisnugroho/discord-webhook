@@ -2,25 +2,33 @@
 
 namespace Thisnugroho\DiscordWebhook\Elements\Concerns;
 
+use Thisnugroho\DiscordWebhook\Elements\File;
 
 trait HasFile
 {
     /**
-     * An array to store file paths.
+     * The file associated with this object, or null if no file is associated.
      *
-     * @var array
+     * @var File|null
      */
-    public array $file = [];
+    public File | null $file = null;
+
 
     /**
-     * Returns the array of files.
+     * Returns the file associated with this object, or null if no file is associated.
      *
-     * @return array
+     * @return File|null
      */
-    public function getFile(): array
+    public function getFile(): File | null
     {
         return $this->file;
     }
 
-    abstract public function file(array $files): static;
+    /**
+     * Set the uploaded files for the request.
+     *
+     * @param  array  $files
+     * @return static
+     */
+    abstract public function file(File $files): static;
 }
