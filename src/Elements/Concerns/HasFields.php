@@ -21,5 +21,5 @@ trait HasFields
         return $this->fields;
     }
 
-    abstract function fields(): static;
+    abstract public function fields(array $fields): static;
 }
