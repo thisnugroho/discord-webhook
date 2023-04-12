@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @see \Thisnugroho\DiscordWebhook\Skeleton\SkeletonClass
- * @method static void send(\Thisnugroho\DiscordWebhook\Messages\Messages $message)
+ * @method static void send(\Thisnugroho\DiscordWebhook\Elements\Element $message)
  * 
  */
 class DiscordWebhook extends Facade
