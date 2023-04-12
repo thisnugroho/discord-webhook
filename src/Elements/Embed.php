@@ -3,10 +3,11 @@
 namespace Thisnugroho\DiscordWebhook\Elements;
 
 use Thisnugroho\DiscordWebhook\Elements\Concerns\HasFields;
+use Thisnugroho\DiscordWebhook\Elements\Concerns\HasImage;
 
 class Embed extends Element
 {
-    use HasFields;
+    use HasFields, HasImage;
 
     /**
      * A string that describes the object or null if no description is set.
@@ -74,6 +75,18 @@ class Embed extends Element
     public function fields(array $fields): static
     {
         $this->fields = $fields;
+        return $this;
+    }
+
+    /**
+     * Set the image for the current instance.
+     *
+     * @param  Image  $image
+     * @return static
+     */
+    public function image(Image $image): static
+    {
+        $this->image = $image;
         return $this;
     }
 
