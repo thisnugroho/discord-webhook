@@ -96,7 +96,7 @@ class Content extends Element
      * @param  array  $files
      * @return static
      */
-    public function file(array $file): static
+    public function file(File $file): static
     {
         $this->file = $file;
         return $this;
