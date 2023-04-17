@@ -31,6 +31,14 @@ class Embed extends Element
     protected string | null $title = null;
 
     /**
+     * The color of the object, represented as a string.
+     * See: https://gist.github.com/thomasbnt/b6f455e2c7d743b796917fa3c205f812
+     * 
+     * @var int|null
+     */
+    protected int | null $color = null;
+
+    /**
      * Set the description for the expectation.
      *
      * @param string $description
@@ -91,6 +99,18 @@ class Embed extends Element
     }
 
     /**
+     * Set the color of the text.
+     *
+     * @param Int $color
+     * @return static
+     */
+    public function color(Int $color): static
+    {
+        $this->color = $color;
+        return $this;
+    }
+
+    /**
      * Get the description of the expectation.
      *
      * @return string
@@ -118,5 +138,15 @@ class Embed extends Element
     public function getTitle(): string | null
     {
         return $this->title;
+    }
+
+    /**
+     * Get the color of the object.
+     *
+     * @return int|null The color of the object, or null if no color is set.
+     */
+    public function getColor(): int | null
+    {
+        return $this->color;
     }
 }
