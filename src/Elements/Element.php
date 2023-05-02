@@ -36,18 +36,18 @@ class Element
         }
 
         if ($value instanceof self) {
-            return $value->toPayload();
+            return $value->toArray();
         }
 
         return $value;
     }
 
     /**
-     * Convert the object to a payload array.
+     * Convert the object to a array.
      *
      * @return array
      */
-    public function toPayload()
+    public function toArray()
     {
         $class = (new \ReflectionClass(static::class));
         $results = [];

@@ -3,41 +3,66 @@
 namespace Thisnugroho\DiscordWebhook;
 
 use Illuminate\Support\Facades\Http;
-use Spatie\DiscordAlerts\DiscordAlert;
 use Thisnugroho\DiscordWebhook\Elements\Element;
 use Thisnugroho\DiscordWebhook\Exceptions\DiscordWebhookException;
-use Thisnugroho\DiscordWebhook\Messages\Messages;
 
 class DiscordWebhook
 {
 
-    private Element $element;
+    protected Element | string | array $payload = [];
 
+    protected bool $payloadHasFile = false;
 
-    private function getPayload(): array
+    public function getPayload(): array | null
     {
-        return $this->element->toPayload();
+        return match (gettype($this->payload)) {
+            'string' => json_decode($this->payload, true),
+            'object' => $this->payload->toArray(),
+            default => $this->payload,
+        };
     }
 
-    private function getPayloadKeys(): array
+    public function isPayloadHasFile(): bool
     {
-        return array_keys($this->getPayload());
+        return $this->payloadHasFile;
     }
 
-    public function send(Element $element)
+    protected function getBaseRequest(bool $multipart = false)
     {
-        $this->element = $element;
-        if (($fileExists = in_array('file', $this->getPayloadKeys())) && in_array('embeds', $this->getPayloadKeys())) {
-            throw new DiscordWebhookException("Embeds and files cannot be sent at once");
+        return $multipart ? Http::asMultipart() : Http::asJson();
+    }
+
+    protected function payloadIsRaw(): bool
+    {
+        return is_string($this->payload);
+    }
+
+    protected function validatePayload(): void
+    {
+        $payload = $this->getPayload();
+        if (json_last_error() != JSON_ERROR_NONE) {
+            throw new DiscordWebhookException("Payload is not valid JSON");
         }
 
-        $baseRequest = $fileExists ? Http::asMultipart() : Http::asJson();
+        $payloadKeys = array_keys($payload);
+        $this->payloadHasFile = in_array('file', $payloadKeys);
 
-        $request = $baseRequest
+        if ($this->isPayloadHasFile() && in_array('embeds', $payloadKeys)) {
+            throw new DiscordWebhookException("Embeds and files cannot be sent at once");
+        }
+    }
+
+    public function send(Element | string $payload): \Illuminate\Http\Client\Response
+    {
+        $this->payload = $payload;
+        $this->validatePayload();
+
+        $baseRequest = $this->getBaseRequest();
+
+        return $baseRequest
             ->post(
                 env("DISCORD_WEBHOOK"),
                 $this->getPayload()
-            );
-        return $request->body();
+            )->throw();
     }
 }
