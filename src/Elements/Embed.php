@@ -39,6 +39,13 @@ class Embed extends Element
     protected int | null $color = null;
 
     /**
+     * The Icon URL associated with the object, if any.
+     *
+     * @var string|null
+     */
+    protected string | null $iconUrl = null;
+
+    /**
      * Set the description for the expectation.
      *
      * @param string $description
@@ -111,6 +118,18 @@ class Embed extends Element
     }
 
     /**
+     * Set the Icon Url
+     *
+     * @param string $url
+     * @return static
+     */
+    public function iconUrl(string $url): static
+    {
+        $this->iconUrl = $url;
+        return $this;
+    }
+
+    /**
      * Get the description of the expectation.
      *
      * @return string
@@ -148,5 +167,15 @@ class Embed extends Element
     public function getColor(): int | null
     {
         return $this->color;
+    }
+
+    /**
+     * Get the Icon URL
+     *
+     * @return string|null The icon url of the object, or null if no icon url is set.
+     */
+    public function getIconUrl(): string | null
+    {
+        return $this->iconUrl;
     }
 }
