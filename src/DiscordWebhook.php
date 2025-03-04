@@ -52,12 +52,12 @@ class DiscordWebhook
         }
     }
 
-    public function send(Element | string $payload): \Illuminate\Http\Client\Response
+    public function send(Element | string $payload, bool $multipart = false): \Illuminate\Http\Client\Response
     {
         $this->payload = $payload;
         $this->validatePayload();
 
-        $baseRequest = $this->getBaseRequest();
+        $baseRequest = $this->getBaseRequest($multipart);
 
         return $baseRequest
             ->post(
