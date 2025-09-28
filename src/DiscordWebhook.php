@@ -61,7 +61,7 @@ class DiscordWebhook
 
         return $baseRequest
             ->post(
-                env("DISCORD_WEBHOOK"),
+                config('discord-webhook.webhook_urls.default'),
                 $this->getPayload()
             )->throw();
     }
